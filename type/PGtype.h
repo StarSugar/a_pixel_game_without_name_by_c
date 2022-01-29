@@ -64,6 +64,7 @@ typedef struct{
     SDL_Event event;
 } PGSystem;
 
+//loadSaves
 typedef struct{
     uint32_t mapHeight;
     uint32_t mapWidth;
@@ -76,12 +77,13 @@ typedef struct{
     uint8_t diffculty;
     uint64_t gameDuration;
     uint32_t newestVersion;
+    uint64_t storgeBasicID;
     uint8_t numberOfWorld;
     uint32_t numberOfRegisteredID;
 } PGsaveFileVariable;
 
 typedef struct{
-    char ID[20];
+    char ID[21];
     uint32_t thirsty;
     /*
     uint32_t strenth;
@@ -93,7 +95,7 @@ typedef struct{
 } PGsavesFilePlayerImformation;
 
 typedef struct{
-    char ID[20];
+    char ID[21];
     uint32_t thirsty;
     /*
     uint32_t strenth;
@@ -111,5 +113,24 @@ typedef struct{
     PGsaveFileVariable var;
     PGsavesFileOwnerImformation owner;
 } PGloadSaveFile;
+
+//storge item
+typedef union{
+    int number;
+    int mainPosition;
+} PGstorgeItemValue;
+
+typedef struct{
+    uint8_t valueType; //0 means number, 1 means mainPosition
+    PGstorgeItemValue val;
+} PGstorgeItem;
+
+typedef struct{
+    uint32_t type;
+    uint64_t ID;
+    unsigned int height;
+    unsigned int width;
+    PGstorgeItem* storgeBag;
+} PGstorgeBag;
 
 #endif /* PGtype_h */
